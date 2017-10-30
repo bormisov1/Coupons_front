@@ -1,0 +1,17 @@
+h2, h3 {
+	display: inline-block;
+}
+
+span {
+	padding-left: 2%;
+	font-size: larger;
+}
+
+.emitent-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.emitent-form > * {
+  width: 100%;
+}
