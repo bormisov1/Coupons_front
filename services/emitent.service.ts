@@ -16,4 +16,10 @@ export class EmitentService {
 	addEmitent(emitent: Emitent): void {
 		return this.localStorageService.pushElToArrayField('emitents', emitent);
 	}
+
+	generateKey(name: string): void {
+		console.log("Generating key with name " + name);
+		// generate...
+		// addEmitent(...);
+	}
 }

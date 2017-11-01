@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material';
 import { MatToolbarModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material';
 
 import 'hammerjs';
 import { AuthGuard } from './guards/auth.guard';
@@ -20,6 +21,8 @@ import { EmitentsComponent } from './emitents/emitents.component';
 import { HeaderComponent } from './header/header.component';
 import { CouponsComponent } from './coupons/coupons.component';
 import { LoginComponent } from './login/login.component';
+
+import { KeyNameDialog } from './emitents/emitents.component';
 
 @NgModule({
   imports: [
@@ -32,6 +35,7 @@ import { LoginComponent } from './login/login.component';
     , MatInputModule
     , MatToolbarModule
     , MatButtonModule
+    , MatDialogModule
   ]
   , declarations: [
     AppComponent
@@ -39,6 +43,8 @@ import { LoginComponent } from './login/login.component';
     , HeaderComponent
     , CouponsComponent
     , LoginComponent
+
+    , KeyNameDialog
   ]
   , providers: [
     AuthGuard
@@ -47,5 +53,8 @@ import { LoginComponent } from './login/login.component';
     , LocalStorageService
   ]
   , bootstrap: [AppComponent]
+  , entryComponents: [
+    KeyNameDialog
+  ]
 })
 export class AppModule { }

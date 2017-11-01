@@ -1,33 +1,20 @@
-<div class="container" fxLayout="column" fxLayoutGap="10px">
-  <div class="emitent-form" fxLayout="column">
-    <mat-form-field>
-      <input matInput placeholder="Region" [(ngModel)]="emitentForm.region">
-    </mat-form-field>
-   
-    <mat-form-field>
-      <input matInput placeholder="City" [(ngModel)]="emitentForm.city">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Description" [(ngModel)]="emitentForm.description">
-    </mat-form-field>
+<div class="container">
+  <div fxLayout="column" fxLayoutGap="10px">
+    <h3>Keys:</h3>
+    <div>
+      <button mat-raised-button (click)="askKeyName()"> Generate </button>
+    </div>
+    <mat-list fxFlex>
+      <mat-list-item *ngFor="let emitent of emitents">
+        <div mat-line *ngIf="emitent.city">
+          <h2>{{emitent.title}}</h2>
+        </div>
+      </mat-list-item>
+      <mat-list-item *ngFor="let emitent of emitents">
+        <div mat-line *ngIf="!emitent.city">
+          <h2>{{emitent.title}}</h2>
+        </div>
+      </mat-list-item>
+    </mat-list>
   </div>
-
-
-  <mat-list fxFlex>
-    <mat-list-item *ngFor="let emitent of emitents">
-      <div mat-line>
-      	<h2>{{emitent.city}}, </h2> <h3>{{emitent.region}}.</h3>
-      </div>
-    	<p mat-line>
-        <span>Description: {{emitent.description}}</span>
-      </p>
-    	<p mat-line>
-        <span>Public key: {{emitent.pubkey}}</span>
-      </p>
-    	<p mat-line>
-        <span>Address: {{emitent.address}}</span>
-      </p>
-    </mat-list-item>
-  </mat-list>
 </div>

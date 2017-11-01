@@ -32,6 +32,11 @@ export class AuthenticationService {
                 } else {
                     return false;
                 }
+            })
+            .catch((error: any) => {
+                console.log('error.status:', error.status);
+                return Observable.of(false);
+                //error.status
             });
     }
 
