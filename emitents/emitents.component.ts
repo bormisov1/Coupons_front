@@ -37,9 +37,21 @@ export class EmitentsComponent implements OnInit {
 
 	    dialogRef.afterClosed().subscribe(keyName => {
 			this.emitentService.generateKey(keyName);
+			this.emitents = this.emitentService.getEmitents();
 	    });
 	}
 
+	makeEmitent(emitent: Emitent): void {
+	    let dialogRef = this.dialog.open(MakeEmitentDialog, {
+			width: '350px'
+			, data: emitent
+	    });
+
+	    dialogRef.afterClosed().subscribe(upgradedEmitent => {
+			this.emitentService.upgradeEmitent(upgradedEmitent);
+			this.emitents = this.emitentService.getEmitents();
+	    });
+	}
 }
 
 @Component({
@@ -53,6 +65,23 @@ export class KeyNameDialog {
 	constructor(
 		public dialogRef: MatDialogRef<KeyNameDialog>,
 		@Inject(MAT_DIALOG_DATA) public data: any
+	) { }
+
+	onNoClick(): void {
+		this.dialogRef.close();
+	}
+
+}
+
+@Component({
+	selector: 'make-emitent-dialog',
+	templateUrl: 'make-emitent-dialog.html',
+})
+export class MakeEmitentDialog {
+
+	constructor(
+		public dialogRef: MatDialogRef<MakeEmitentDialog>,
+		@Inject(MAT_DIALOG_DATA) public emitentBlank: any
 	) { }
 
 	onNoClick(): void {

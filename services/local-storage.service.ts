@@ -19,9 +19,19 @@ export class LocalStorageService {
     }
 
     pushElToArrayField<T>(arrayKey: string, element: any): void {
-        let modifiedArray = this.get<T[]>(arrayKey);
+        let modifiedArray = this.get<T[]>(arrayKey) || ([] as T[]);
         modifiedArray.push(element);
         return this.set(arrayKey, modifiedArray);
     }
 
+    updateArrayElWithSameField<T>(matchingField: string, element: any, arrayKey: string): void {
+        let modifiedArray = this.get<T[]>(arrayKey) || ([] as T[]);
+        for (let i: number = 0; i != modifiedArray.length; i++) {
+            if (modifiedArray[i][matchingField] == element[matchingField]) {
+                modifiedArray[i] = element;
+                break;
+            }
+        }
+        return this.set(arrayKey, modifiedArray);
+    }
 }
