@@ -1,20 +1,42 @@
 <div class="container">
-  <div fxLayout="column" fxLayoutGap="10px">
-    <h3>Keys:</h3>
-    <div>
-      <button mat-raised-button (click)="askKeyName()"> Generate </button>
+    <div fxLayout="row" fxLayoutGap="10px" fxFlex>
+        <h3>Keys:</h3>
+
+        <button mat-raised-button color="primary" (click)="askKeyName()"> Generate </button>
+
+        <mat-card *ngFor="let emitent of emitents" fxFlex="30">
+            <mat-card-header>
+                <mat-card-title>
+                    <h3>{{emitent.title}}</h3>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-card-title-group>
+                    <mat-card-subtitle>
+                        Address
+                    </mat-card-subtitle>
+                </mat-card-title-group>
+                <p>
+                    {{emitent.address}}
+                </p>
+                <mat-card-title-group>
+                    <mat-card-subtitle>
+                        Public Key
+                    </mat-card-subtitle>
+                </mat-card-title-group>
+                <p>
+                    {{emitent.pubkey}}
+                </p>
+                <mat-card-title-group>
+                    <mat-card-subtitle>
+                        Private Key
+                    </mat-card-subtitle>
+                </mat-card-title-group>
+                <p>
+                    {{emitent.privkey}}
+                </p>
+                <button mat-raised-button (click)="makeEmitent(emitent)">Make emitent</button>
+            </mat-card-content>
+        </mat-card>
     </div>
-    <mat-list fxFlex>
-      <mat-list-item *ngFor="let emitent of emitents">
-        <div mat-line *ngIf="emitent.city">
-          <h2>{{emitent.title}}</h2>
-        </div>
-      </mat-list-item>
-      <mat-list-item *ngFor="let emitent of emitents">
-        <div mat-line *ngIf="!emitent.city">
-          <h2>{{emitent.title}}</h2>
-        </div>
-      </mat-list-item>
-    </mat-list>
-  </div>
 </div>

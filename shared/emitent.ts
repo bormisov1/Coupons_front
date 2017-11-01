@@ -1,8 +1,11 @@
 export class Emitent {
+	title: string;
+	address: string;
 	pubkey: string;
+	privkey: string;
+
 	city: string;
 	region: string;
 	description: string;
-	address: string;
 	pubkey_confirmation: string;
 };
