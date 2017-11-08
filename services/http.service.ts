@@ -23,9 +23,17 @@ export class HttpService {
 	    if (this.token)
 	    	headers.append('x-access-token', this.token);
 	    headers.append('Content-Type', 'application/json');
-        this.http.post(baseURL + path, data, { headers: headers })
+        console.log('pre-http');
+        this.http.post(baseURL + path, JSON.stringify(data), { headers: headers })
             .map((response: Response) => {
+                console.log(response);
                 callback(response.json());
-            });
+            })
+            .catch((error: any) => {
+                console.log('error:', error);
+                console.log('error.status:', error.status);
+                return Observable.of(false);
+            })
+            .subscribe();
     }
 }

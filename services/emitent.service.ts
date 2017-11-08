@@ -54,6 +54,7 @@ export class EmitentService {
 
 	makeSignedEmitentMessage(emitent: Emitent): {} {
 		let emitentMessage = new Blockchain.Message('emitent');
+		emitentMessage.type = 'emitent';
 		emitentMessage.pubkey = emitent.pubkey;
 		emitentMessage.description = emitent.description;
 		emitentMessage.region = emitent.region;
