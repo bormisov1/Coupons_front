@@ -3,14 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
-import { EmitentsComponent } from './emitents/emitents.component';
-import { CouponsComponent } from './coupons/coupons.component';
+import { ChatComponent } from './chat/chat.component';
+import { BotsComponent } from './bots/bots.component';
  
 const routes: Routes = [
-  { path: '', redirectTo: '/emitents', pathMatch: 'full' }
+  { path: '', redirectTo: '/chat', pathMatch: 'full' }
   , { path: 'login',     component: LoginComponent }
-  , { path: 'emitents',  component: EmitentsComponent, canActivate: [AuthGuard] }
-  , { path: 'coupons',   component: CouponsComponent, canActivate: [AuthGuard] }
+  , { path: 'bots',  component: BotsComponent, canActivate: [AuthGuard] }
+  , { path: 'chat',   component: ChatComponent, canActivate: [AuthGuard] }
 ];
  
 @NgModule({

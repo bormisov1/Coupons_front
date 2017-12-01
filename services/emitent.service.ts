@@ -39,6 +39,7 @@ export class EmitentService {
 			, region: ''
 			, description: ''
 			, pubkey_confirmation: ''
+			, isEmitent: false
 		};
 		this.addEmitent(emitent);
 	}

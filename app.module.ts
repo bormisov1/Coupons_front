@@ -8,6 +8,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { GlobalEventsManager } from './services/global-events-manager.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { HttpService } from './services/http.service';
+import { WebsocketService } from './services/websocket.service';
+
+import { BotsService } from './services/bots.service';
+import { ChatService } from './services/chat.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material';
@@ -16,7 +20,8 @@ import { MatButtonModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material';
-
+import { MatProgressSpinnerModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material';
 
 import 'hammerjs';
 import { AuthGuard } from './guards/auth.guard';
@@ -28,6 +33,9 @@ import { LoginComponent } from './login/login.component';
 
 import { KeyNameDialog } from './emitents/emitents.component';
 import { MakeEmitentDialog } from './emitents/emitents.component';
+import { MakeCouponDialog } from './emitents/emitents.component';
+import { ChatComponent } from './chat/chat.component';
+import { BotsComponent } from './bots/bots.component';
 
 @NgModule({
   imports: [
@@ -43,6 +51,8 @@ import { MakeEmitentDialog } from './emitents/emitents.component';
     , MatDialogModule
     , MatCardModule
     , MatGridListModule
+    , MatProgressSpinnerModule
+    , MatSelectModule
   ]
   , declarations: [
     AppComponent
@@ -53,6 +63,7 @@ import { MakeEmitentDialog } from './emitents/emitents.component';
 
     , KeyNameDialog
     , MakeEmitentDialog
+    , MakeCouponDialog, ChatComponent, BotsComponent
   ]
   , providers: [
     AuthGuard
@@ -60,11 +71,16 @@ import { MakeEmitentDialog } from './emitents/emitents.component';
     , GlobalEventsManager
     , LocalStorageService
     , HttpService
+    , WebsocketService
+
+    , BotsService
+    , ChatService
   ]
   , bootstrap: [AppComponent]
   , entryComponents: [
     KeyNameDialog
     , MakeEmitentDialog
+    , MakeCouponDialog
   ]
 })
 export class AppModule { }

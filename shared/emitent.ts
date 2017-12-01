@@ -1,5 +1,6 @@
 export class Emitent {
 	title: string;
+	
 	address: string;
 	pubkey: string;
 	privkey: string;
@@ -8,4 +9,6 @@ export class Emitent {
 	region: string;
 	description: string;
 	pubkey_confirmation: string;
+
+	isEmitent: boolean;
 };

@@ -18,7 +18,7 @@ export class LocalStorageService {
         return localStorage.setItem(key, JSON.stringify(value));
     }
 
-    pushElToArrayField<T>(arrayKey: string, element: any): void {
+    pushElToArrayField<T>(arrayKey: string, element: T): void {
         let modifiedArray = this.get<T[]>(arrayKey) || ([] as T[]);
         modifiedArray.push(element);
         return this.set(arrayKey, modifiedArray);

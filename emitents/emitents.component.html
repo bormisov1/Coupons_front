@@ -8,6 +8,7 @@
             <mat-card-header>
                 <mat-card-title>
                     <h3>{{emitent.title}}</h3>
+                    <div *ngIf="emitent.isEmitent">[EMITENT]</div>
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content>
@@ -35,7 +36,8 @@
                 <p>
                     {{emitent.privkey}}
                 </p>
-                <button mat-raised-button (click)="makeEmitent(emitent)">Make emitent</button>
+                <button *ngIf="!emitent.isEmitent" mat-raised-button (click)="makeEmitent(emitent)">Make emitent</button>
+                <button *ngIf="emitent.isEmitent" mat-raised-button (click)="makeCoupon(emitent)">+ Coupon</button>
             </mat-card-content>
         </mat-card>
     </div>

@@ -10,12 +10,8 @@ export const menuButtons: MenuButton[] = [
 		, text: 'Login'
 		, whatStatusFor: 1
 	}, {
-		href: '/emitents'
-		, text: 'Emitents'
-		, whatStatusFor: 2
-	}, {
-		href: '/coupons'
-		, text: 'Coupons'
+		href: '/chat'
+		, text: 'Chat'
 		, whatStatusFor: 2
 	}, {
 		href: '/login'

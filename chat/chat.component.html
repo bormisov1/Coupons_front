@@ -1,0 +1,41 @@
+<div class="hero chat-wrapper">
+	<div class="msg-list" #list [scrollTop]="list.scrollHeight">
+		<div class="columns is-mobile" *ngIf="bot.name && bot.firstMessage" style="width:100%">
+			<div class="chat-bubble column is-6">
+				<p><b>{{bot.name}}</b>: {{bot.firstMessage.text}} </p>
+			</div>
+		</div>
+		<div class="columns is-mobile" style="width:100%" *ngFor="let msg of msgs;trackBy:msg?.serialNum">
+			<div [ngClass]="{'is-offset-5 me': msg.isOutgoing, 'is-6': !msg.isOutgoing}" class="chat-bubble column">
+				<p><b>{{msg.isOutgoing?"Вы":bot.name}}</b>: {{msg.text}} </p>
+			</div>
+		</div>
+		<div class="columns is-mobile" style="width:100%" *ngFor="let msg of unconfirmedMsgs;trackBy:msg?.temporarySerialNum">
+			<div class="chat-bubble column is-offset-5 me">
+				<p><b>Вы</b>: {{msg.text}} <mat-spinner [diameter]="20" [strokeWidth]="3" color="accent"></mat-spinner></p>
+			</div>
+		</div>
+	</div>
+	<div class="columns chat-bar">
+		<div class="buttons is-centered" *ngIf="userInputMode === 2">
+			<span class="button" *ngFor="let button of currentButtons" (click)="sendMessage(button.text)">
+				{{button.text}}
+			</span>
+		</div>
+		<mat-form-field *ngIf="userInputMode === 3">
+			<mat-select placeholder="Ваш ответ" [(ngModel)]="currentMessageText">
+				<mat-option *ngFor="let option of currentSelects" [value]="option.answer">
+					{{option.label}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<div class="column is-11" *ngIf="userInputMode === 1">
+			<input (keyup.enter)="sendMessage()" #currentMessage class="input" [(ngModel)]="currentMessageText">
+		</div>
+		<div class="column is-2" *ngIf="userInputMode === 1 || userInputMode === 3">
+			<button class="button is-success" (click)="sendMessage()" [disabled]="!currentMessageText.length">
+				Отправить
+			</button>
+		</div>
+	</div>
+</div>

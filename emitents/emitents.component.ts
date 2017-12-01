@@ -3,13 +3,15 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Emitent } from '../shared/emitent';
 import { EmitentService } from '../services/emitent.service';
+import { Coupon } from '../shared/coupon';
+import { CouponService } from '../services/coupon.service';
 import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
 	selector: 'app-emitents',
 	templateUrl: './emitents.component.html',
 	styleUrls: ['./emitents.component.scss'],
-	providers: [EmitentService, LocalStorageService]
+	providers: [EmitentService, CouponService, LocalStorageService]
 })
 export class EmitentsComponent implements OnInit {
 
@@ -18,6 +20,7 @@ export class EmitentsComponent implements OnInit {
 
 	constructor(
 		private emitentService: EmitentService
+		, private couponService: CouponService
 		, public dialog: MatDialog
 	) { }
 
@@ -48,8 +51,23 @@ export class EmitentsComponent implements OnInit {
 	    });
 
 	    dialogRef.afterClosed().subscribe(upgradedEmitent => {
+	    	upgradedEmitent.isEmitent = true;
 			this.emitentService.upgradeEmitent(upgradedEmitent);
 			this.emitents = this.emitentService.getEmitents();
+	    });
+	}
+
+	makeCoupon(ofEmitent: Emitent): void {
+	    let dialogRef = this.dialog.open(MakeCouponDialog, {
+			width: '350px'
+			, data: ofEmitent
+	    });
+
+	    dialogRef.afterClosed().subscribe(couponMade => {
+	    	couponMade.emitent_pubkey = ofEmitent.pubkey;
+	    	couponMade.code = '1'; // coupon index for this emitent should be here? or what?
+	    	console.log(couponMade);
+	    	this.couponService.addCoupon(couponMade);
 	    });
 	}
 }
@@ -82,6 +100,25 @@ export class MakeEmitentDialog {
 	constructor(
 		public dialogRef: MatDialogRef<MakeEmitentDialog>,
 		@Inject(MAT_DIALOG_DATA) public emitentBlank: any
+	) { }
+
+	onNoClick(): void {
+		this.dialogRef.close();
+	}
+
+}
+
+@Component({
+	selector: 'make-coupon-dialog',
+	templateUrl: 'make-coupon-dialog.html',
+})
+export class MakeCouponDialog {
+
+	couponForm = new Coupon();
+
+	constructor(
+		public dialogRef: MatDialogRef<MakeCouponDialog>,
+		@Inject(MAT_DIALOG_DATA) public ofEmitent: any
 	) { }
 
 	onNoClick(): void {
